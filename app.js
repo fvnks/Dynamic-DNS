@@ -8,9 +8,9 @@ app.get('/update-ip', async (req, res) => {
   try {
     const fetch = (await import('node-fetch')).default; // Dynamically import node-fetch
 
-    const zoneId = '2e9e4663f6b3e29d70e61a172b58d31d';
-    const dnsRecordName = 'host.fedestore.cl';
-    const cloudflareApiToken = '7rcGo4ktp1YzS4jpoNRyYk6V7t0-DVAg3af6pHRR';
+    const zoneId = 'tuzoneid';
+    const dnsRecordName = 'host.dominio.cl';
+    const cloudflareApiToken = 'tuapitokendecloudflare';
 
     // Get the external IP address
     const ipResponse = await fetch('https://api.ipify.org?format=json');
