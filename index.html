@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic DNS Manager</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 50px;
+        }
+        #ip-address {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dynamic DNS Manager</h1>
+    <div id="ip-address">Current IP: <span id="current-ip">Loading...</span></div>
+    <button id="update-ip">Update IP</button>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentIp = document.getElementById('current-ip');
+            const updateIpButton = document.getElementById('update-ip');
+
+            // Function to fetch and display the current IP address
+            const fetchIpAddress = async () => {
+                try {
+                    const response = await fetch('https://api.ipify.org?format=json');
+                    const data = await response.json();
+                    currentIp.textContent = data.ip;
+                } catch (error) {
+                    currentIp.textContent = 'Error fetching IP';
+                    console.error('Error fetching IP:', error);
+                }
+            };
+
+            // Function to update the IP address
+            const updateIpAddress = async () => {
+                try {
+                    // Replace with your dynamic DNS URL
+                    const dynamicDnsUrl = 'https://fedestore.cl/cpanelwebcall/chfardpqzkrqnfhnpqeanhumzlypfoqx';
+                    const response = await fetch(dynamicDnsUrl);
+                    if (response.ok) {
+                        alert('IP address updated successfully!');
+                    } else {
+                        alert('Failed to update IP address.');
+                    }
+                } catch (error) {
+                    alert('Error updating IP address.');
+                    console.error('Error updating IP:', error);
+                }
+            };
+
+            // Initial IP address fetch
+            fetchIpAddress();
+
+            // Update IP address on button click
+            updateIpButton.addEventListener('click', updateIpAddress);
+        });
+    </script>
+</body>
+</html>
